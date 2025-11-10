@@ -21,14 +21,18 @@ This project is an end-to-end data science and web application pipeline that pre
 
 ## Project Structure  
 
+├── notebook/ # Jupyter notebooks (data exploration and prototyping) 
 
-/
-├── notebook/ # Jupyter notebooks (data exploration and prototyping)
 ├── src/ # Source code: pipelines, data classes
+
 ├── templates/ # HTML templates for Flask UI
+
 ├── data_analysis.py # Python module for EDA context generation
+
 ├── app.py # Flask application entry point
+
 ├── requirements.txt # Python dependencies
+
 └── README.md # This file
 
 
