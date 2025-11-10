@@ -48,25 +48,25 @@ This project is an end-to-end data science and web application pipeline that pre
    cd Student-Performance-Prediction-System  
 
 
-Create and activate a virtual environment:
+#Create and activate a virtual environment:
 
 python3 -m venv venv  
 source venv/bin/activate  # On Windows: venv\Scripts\activate  
 
 
-Install required packages:
+#Install required packages:
 
 pip install -r requirements.txt  
 
 
-Run the Flask application:
+#Run the Flask application:
 
 python app.py  
 
 
 Navigate to http://localhost:8080/ in your browser. Use the navigation to explore the prediction page and the data-analysis dashboard.
 
-How to Use
+#How to Use
 
 Prediction Page: Input student attributes (gender, ethnicity, parental level of education, lunch status, test preparation, reading & writing scores) and submit to get a predicted outcome.
 
@@ -74,6 +74,6 @@ Data Analysis Dashboard: View dataset summary, distributions, correlations, cate
 
 Use the insights and visuals to understand the data characteristics, potential feature engineering ideas, and model implications.
 
-Contributing
+#Contributing
 
 Contributions are welcome! Feel free to open issues or pull requests for bug fixes, new features, or improvements in EDA, UI, and model performance.
