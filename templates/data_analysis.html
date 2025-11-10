@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .meta-info {
+            color: #666;
+            font-size: 1.1em;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            margin-bottom: 30px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .card-icon {
+            font-size: 35px;
+        }
+
+        .card-title {
+            color: #333;
+            font-size: 1.8em;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .card-body {
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin: 25px 0 15px 0;
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-inline {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .form-inline label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control {
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            min-width: 200px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-outline {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        /* Color themes for different card types */
+        .card-primary .card-header { border-bottom-color: #667eea; }
+        .card-info .card-header { border-bottom-color: #17a2b8; }
+        .card-success .card-header { border-bottom-color: #28a745; }
+        .card-warning .card-header { border-bottom-color: #ffc107; }
+        .card-danger .card-header { border-bottom-color: #dc3545; }
+        .card-secondary .card-header { border-bottom-color: #6c757d; }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .header, .card {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .card-title {
+                font-size: 1.4em;
+            }
+
+            .form-inline {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-control {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">📊</div>
+            <h1>Data Analysis Dashboard</h1>
+            <p class="meta-info">Dataset Size: {{ row_count }} rows × {{ col_count }} columns</p>
+        </div>
+
+        <!-- Sample Data -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <span class="card-icon">📋</span>
+                <h2 class="card-title">Sample Data</h2>
+            </div>
+            <div class="card-body table-responsive">
+                {{ sample_html | safe }}
+            </div>
+        </div>
+
+        <!-- Missing Values -->
+        {% if missing_html %}
+        <div class="card card-info">
+            <div class="card-header">
+                <span class="card-icon">❓</span>
+                <h2 class="card-title">Missing Values Analysis</h2>
+            </div>
+            <div class="card-body table-responsive">
+                {{ missing_html | safe }}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Summary Statistics -->
+        <div class="card card-secondary">
+            <div class="card-header">
+                <span class="card-icon">📈</span>
+                <h2 class="card-title">Summary Statistics</h2>
+            </div>
+            <div class="card-body table-responsive">
+                {{ describe_html | safe }}
+            </div>
+        </div>
+
+        <!-- Distribution Plots -->
+        <div class="card card-success">
+            <div class="card-header">
+                <span class="card-icon">📊</span>
+                <h2 class="card-title">Distribution Analysis</h2>
+            </div>
+            <div class="card-body">
+                {% if hist_png %}
+                    <h3 class="section-title">Numeric Distributions</h3>
+                    <img src="{{ hist_png }}" alt="Histograms">
+                {% endif %}
+
+                {% if box_png %}
+                    <h3 class="section-title">Boxplots (Outlier Detection)</h3>
+                    <img src="{{ box_png }}" alt="Boxplots">
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Correlation Analysis -->
+        <div class="card card-warning">
+            <div class="card-header">
+                <span class="card-icon">🔗</span>
+                <h2 class="card-title">Correlation Analysis</h2>
+            </div>
+            <div class="card-body">
+                {% if corr_png %}
+                    <h3 class="section-title">Correlation Heatmap</h3>
+                    <img src="{{ corr_png }}" alt="Correlation Heatmap">
+                {% endif %}
+                
+                {% if pair_png %}
+                    <h3 class="section-title">Pairplot Analysis</h3>
+                    <img src="{{ pair_png }}" alt="Pairplot">
+                {% endif %}
+                
+                {% if top_corrs_html %}
+                    <h3 class="section-title">Top Correlations</h3>
+                    <div class="table-responsive">{{ top_corrs_html | safe }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Outlier & Skewness -->
+        {% if outlier_html or skew_kurt_html %}
+        <div class="card card-danger">
+            <div class="card-header">
+                <span class="card-icon">⚠️</span>
+                <h2 class="card-title">Data Distribution Insights</h2>
+            </div>
+            <div class="card-body">
+                {% if outlier_html %}
+                    <h3 class="section-title">Outlier Summary</h3>
+                    <div class="table-responsive">{{ outlier_html | safe }}</div>
+                {% endif %}
+                
+                {% if skew_kurt_html %}
+                    <h3 class="section-title">Skewness & Kurtosis</h3>
+                    <div class="table-responsive">{{ skew_kurt_html | safe }}</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Categorical Analysis -->
+        {% if categorical_cols %}
+        <div class="card card-primary">
+            <div class="card-header">
+                <span class="card-icon">🏷️</span>
+                <h2 class="card-title">Categorical Analysis</h2>
+            </div>
+            <div class="card-body">
+                <div class="form-section">
+                    <form method="get" action="{{ url_for('data_analysis') }}" class="form-inline">
+                        <label for="col">Choose categorical column:</label>
+                        <select name="col" id="col" class="form-control">
+                            <option value="">-- Select a column --</option>
+                            {% for c in categorical_cols %}
+                            <option value="{{ c }}" {% if c == selected_col %}selected{% endif %}>{{ c }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-primary" type="submit">Update Chart</button>
+                    </form>
+                </div>
+
+                {% if cat_png %}
+                    <h3 class="section-title">Distribution for {{ selected_col }}</h3>
+                    <img src="{{ cat_png }}" alt="Categorical Distribution">
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Target Column Analysis -->
+        {% if target_analysis %}
+        <div class="card card-info">
+            <div class="card-header">
+                <span class="card-icon">🎯</span>
+                <h2 class="card-title">Target Column Analysis</h2>
+            </div>
+            <div class="card-body">
+                {% if target_analysis.target_dist_png %}
+                    <h3 class="section-title">Target Distribution</h3>
+                    <img src="{{ target_analysis.target_dist_png }}" alt="Target Distribution">
+                {% endif %}
+                
+                {% if target_analysis.target_counts_html %}
+                    <h3 class="section-title">Target Value Counts</h3>
+                    <div class="table-responsive">{{ target_analysis.target_counts_html | safe }}</div>
+                {% endif %}
+                
+                {% if target_analysis.target_numeric_by_cat_html %}
+                    <h3 class="section-title">Target by Categorical Variables</h3>
+                    <div class="table-responsive">{{ target_analysis.target_numeric_by_cat_html | safe }}</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Back Button -->
+        <div style="text-align: center;">
+            <a href="{{ url_for('index') }}" class="back-link">
+                <span>←</span> Back to Home
+            </a>
+        </div>
+    </div>
+</body>
+</html>

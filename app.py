@@ -4,7 +4,7 @@ import pandas as pd
 
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
-
+from data_analysis import generate_eda_context
 application=Flask(__name__)
 
 app=application
@@ -39,7 +39,28 @@ def predict_datapoint():
         results=predict_pipeline.predict(pred_df)
         print("after Prediction")
         return render_template('home.html',results=results[0])
+
+
+
+
+@app.route('/data-analysis', methods=['GET'])
+def data_analysis():
+    # Path to your dataset
+    data_path = '/Users/dheerajsajja/Documents/Student Performance Prediction System/notebook/data/stud.csv'
     
+    # Optional query parameters for dynamic exploration
+    selected_col = request.args.get('col')          # categorical column for barplot
+    target_col = request.args.get('target')         # target column (if you want target-specific plots)
+
+    # Generate full EDA context
+    ctx = generate_eda_context(
+        csv_path=data_path,
+        selected_categorical=selected_col,
+        target_col=target_col
+    )
+
+    # Pass everything to your template
+    return render_template('data_analysis.html', **ctx)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True) 
